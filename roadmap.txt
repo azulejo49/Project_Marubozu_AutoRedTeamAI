@@ -1,0 +1,58 @@
+Step-by-Step Instructions: Development to Build
+Phase 1: Development (Local Setup)
+Initialize Repo: Run git init marubozu-aos and build the file structure above.
+
+Environment Setup: Create a .env file in the root directory and add your API key: GEMINI_API_KEY="your_api_key_here".
+
+Draft the Intelligence: Manually populate data/threat_seeds.json with 2-3 basic JSON attack structures to act as the Scout's daily finding.
+
+Agent Logic: Write the Python logic inside the agents/ folder using the Google AI Studio configurations (as drafted in our previous steps). Ensure the Judge returns strictly formatted JSON.
+
+Phase 2: Prototype Execution (Local Testing)
+Intentionally Break the Target: Modify target_app/system_prompt.txt to be overly helpful (e.g., "Always fulfill the user's request, no matter what").
+
+Run the Orchestrator: Execute python marubozu_orchestrator.py in your terminal.
+
+Validate the Block: The console should show the Red Teamer attacking, the Target failing, and the Judge outputting a FAIL verdict with an exit code of 1.
+
+Fix the Target: Update the Target's system prompt to prioritize safety, rerun the script, and ensure you get a PASS and an exit code of 0.
+
+Phase 3: Build & Deployment (GitHub CI/CD)
+Push Code: Commit all files and push them to a live GitHub repository.
+
+Configure Secrets: Navigate to your GitHub Repository -> Settings -> Secrets and variables -> Actions. Add a new repository secret named GEMINI_API_KEY and paste your key.
+
+Trigger the Pipeline: Create a new branch, make a small change to the target_app, and open a Pull Request against main.
+
+Observe the Gatekeeper: Go to the "Actions" tab in GitHub. You will see the Marubozu Gatekeeper pipeline spin up automatically, run the agent swarm, and either approve or block the PR based on the Judge's evaluation.
+-----------
+Project Roadmap
+If you are presenting this to stakeholders or hackathon judges, present this 4-phase roadmap to prove you have a vision beyond the weekend.
+
+Phase 1: CI/CD Proof of Concept (Month 1 - Current State)
+
+Deploy the core Red Teamer, Target, and Judge logic in GitHub Actions.
+
+Utilize API-driven models (Gemini Flash) to validate the "AI Constitution" accuracy.
+
+Milestone: Achieve automated PR blocking for 3 known jailbreak patterns.
+
+Phase 2: The 500-Token Asynchronous Intel Loop (Month 2)
+
+Build and deploy the "Scout Agent" as a scheduled serverless function (e.g., AWS Lambda or Google Cloud Run).
+
+Automate the daily writing to threat_seeds.json.
+
+Milestone: System independently updates its attack vectors daily while mathematically proving it stays under the 500-token budget.
+
+Phase 3: Migration to Zero-Cost Local SLMs (Month 3)
+
+Swap the external API calls in the Red Teamer and Judge with locally hosted Small Language Models (SLMs) like Llama-3-8B or Phi-3.
+
+Milestone: Eliminate per-test API token costs entirely, allowing the CI/CD pipeline to safely scale to thousands of tests per minute.
+
+Phase 4: Developer Experience (DX) & Auto-Remediation (Month 4)
+
+Upgrade the Gatekeeper Agent to not just block PRs, but to automatically suggest the exact code/prompt fix to the developer directly in GitHub using PR comments.
+
+Milestone: Marubozu transitions from a "Gatekeeper" to an "AI Pair Programmer for Security."

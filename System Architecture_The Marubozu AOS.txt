@@ -1,0 +1,15 @@
+graph TD
+    subgraph "The Intel Loop (Runs Daily - 500 Token Limit)"
+        S[Agent 1: The Scout] -->|Calls External API| API(Frontier Model)
+        API -->|Returns 3 Attack Seeds| DB[(Threat Vector DB)]
+    end
+
+    subgraph "The CI/CD Loop (Runs on Git Push - Token Free)"
+        PR[Developer Push] --> G[Agent 5: The Gatekeeper]
+        G -->|Triggers| RT[Agent 2: The Red Teamer]
+        DB -->|Supplies Seed| RT
+        RT -->|Generates 50+ Payloads| T[Agent 3: The Target AI]
+        T -->|Replies to Payloads| J[Agent 4: The Judge]
+        J -->|Evaluates via Constitution| G
+        G -->|Pass/Fail PR Comment| PR
+    end

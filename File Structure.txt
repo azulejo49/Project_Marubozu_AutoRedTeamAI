@@ -1,0 +1,27 @@
+File Structure
+
+marubozu-aos/
+│
+├── .github/
+│   └── workflows/
+│       └── marubozu-ci.yml         # The CI/CD Gatekeeper pipeline
+│
+├── agents/                         # The AI Swarm Logic
+│   ├── __init__.py
+│   ├── scout_agent.py              # Asynchronous Threat Intel (500-token limit)
+│   ├── red_teamer_agent.py         # Local Mutation Engine
+│   └── judge_agent.py              # Evaluator strictly following the Constitution
+│
+├── data/                           # Threat Intelligence & Policy
+│   ├── ai_constitution.md          # The 500-token source-of-truth ruleset
+│   └── threat_seeds.json           # Local DB populated daily by the Scout
+│
+├── target_app/                     # The App being tested (The Candidate)
+│   ├── main_app.py                 # The LLM application code
+│   └── system_prompt.txt           # The prompt developers are modifying
+│
+├── .env.example                    # Template for API keys
+├── .gitignore                      # Standard Python gitignore
+├── requirements.txt                # Dependency list
+├── marubozu_orchestrator.py        # The Gatekeeper Agent (Main execution script)
+└── README.md                       # High-level project documentation
