@@ -1,0 +1,18 @@
+Project Marubozu
+
+The Red Teamer (Attacker) will create prompts based on topics like dangerous content, hate speech, harassment etc.,  user will ask for prompts of the respected topic, Red team AI Agent Marubozu will then generate these prompts based on Levels of Adversariality and Jailbreak Techniques requested from the user.
+
+1. Non-Adversarial Prompts
+These are standard, benign requests that represent typical user behavior. The goal here is to establish a "baseline" to ensure the AI doesn't have "false positives" (refusing safe tasks).
+
+
+2. Low-Adversarial Prompts
+These involve mildly sensitive topics or "gray area" questions. The user isn't necessarily trying to "break" the AI, but they are asking for something that could potentially violate a policy if the AI isn't careful.
+
+
+3. Medium-Adversarial Prompts
+At this level, the user begins to use deliberate pressure or common bypass techniques. This often involves roleplay, emotional manipulation, or framing a prohibited request as a creative writing exercise.
+
+
+4. High-Adversarial Prompts
+These are highly complex, multi-step attacks. They often involve "jailbreaks" (like the DAN method), prompt injection, obfuscation (using Base64 encoding or leetspeak), or deeply nested logic designed to confuse the model's primary directives.
